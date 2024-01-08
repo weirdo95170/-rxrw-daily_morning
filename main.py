@@ -9,7 +9,7 @@ from lunardate import LunarDate
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
-last_date = os.environ['LAST_DATE']
+last_date = "2024-01-06"
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
 
