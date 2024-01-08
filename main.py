@@ -61,7 +61,7 @@ def get_today():
   formatted_date = today.strftime("%Y年%m月%d日")
   return formatted_date
     
-def get_lunar_birthday(birthday_year, birthday_month, birthday_day):
+def get_lunar_birthday():
     birthday_year = 2001
     birthday_month = 1
     birthday_day = 10
@@ -94,7 +94,7 @@ data = {"weather":{"value":dayweather},
         "name":{"value":"傻宝儿"},
         "date":{"value":get_today()},
         "city":{"value":"山西省临汾市隰县"},
-        "lunardate":{"value":get_today()},
+        "lunardate":{"value":get_lunar_birthday()},
         }
 res = wm.send_template(user_id, template_id, data)
 print(res)
