@@ -40,6 +40,13 @@ def get_count():
   start_date_1 = datetime.strptime(start_date, "%Y-%m-%d")
   delta = today- start_date_1
   return delta.days
+    
+def not_meet():
+  today = datetime.now()
+  global last_date
+  last_date_1 = datetime.strptime(last_date, "%Y-%m-%d")
+  missU = today- last_date_1
+  return missU
 
 def get_birthday():
   today = datetime.now()
@@ -61,13 +68,6 @@ def get_today():
   today = datetime.now()
   formatted_date = today.strftime("%Y年%m月%d日")
   return formatted_date
-
-def not_meet():
-  today = datetime.now()
-  global last_date
-  start_date_1 = last_date.strptime(start_date, "%Y-%m-%d")
-  missU = today- start_date_1
-  return missU
     
 def get_lunar_birthday():
     birthday_year = 2001
