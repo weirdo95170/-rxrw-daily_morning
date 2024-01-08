@@ -5,6 +5,7 @@ from wechatpy.client.api import WeChatMessage, WeChatTemplate
 import requests
 import os
 import random
+from lunardate import LunarDate
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
@@ -59,6 +60,24 @@ def get_today():
   today = datetime.now()
   formatted_date = today.strftime("%Y年%m月%d日")
   return formatted_date
+    
+def get_lunar_birthday(birthday_year, birthday_month, birthday_day):
+    birthday_year = 2001
+    birthday_month = 1
+    birthday_day = 10
+    today = datetime.now().date()
+    lunar_today = LunarDate.fromSolarDate(today.year, today.month, today.day)
+
+    lunar_birthday = LunarDate(birthday_year, birthday_month, birthday_day)
+    
+    if (lunar_birthday.month, lunar_birthday.day) < (lunar_today.month, lunar_today.day):
+        lunar_birthday = LunarDate(lunar_today.year + 1, birthday_month, birthday_day)
+    else:
+        lunar_birthday = LunarDate(lunar_today.year, birthday_month, birthday_day)
+
+    days_to_birthday = (lunar_birthday.toSolarDate() - today).days
+
+    return days_to_birthday
 
 
 client = WeChatClient(app_id, app_secret)
@@ -74,7 +93,8 @@ data = {"weather":{"value":dayweather},
         "color":get_random_color()},
         "name":{"value":"傻宝儿"},
         "date":{"value":get_today()},
-        "city":{"value":"山西省临汾市隰县"}
+        "city":{"value":"山西省临汾市隰县"},
+        "lunardate":{"value":get_today()},
         }
 res = wm.send_template(user_id, template_id, data)
 print(res)
