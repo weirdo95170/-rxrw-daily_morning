@@ -33,7 +33,7 @@ def get_weather():
     return daytemp_float,nighttemp_float ,dayweather,nightweather
 
 def get_count():
-  start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+  start_date = datetime.strptime(start_date, "%Y-%m-%d")
   delta = today- start_date
   return delta.day
 
