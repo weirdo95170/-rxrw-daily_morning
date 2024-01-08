@@ -6,8 +6,7 @@ import requests
 import os
 import random
 
-today_1 = datetime.now()
-today = today_1.strftime("%Y-%m-%d")
+today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
@@ -34,8 +33,9 @@ def get_weather():
     return daytemp_float,nighttemp_float ,dayweather,nightweather
 
 def get_count():
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
-  return delta.days
+  start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+  delta = today- start_date
+  return delta.day
 
 def get_birthday():
   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
