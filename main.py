@@ -9,6 +9,7 @@ from lunardate import LunarDate
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
+last_date = os.environ['LAST_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
 
@@ -60,6 +61,13 @@ def get_today():
   today = datetime.now()
   formatted_date = today.strftime("%Y年%m月%d日")
   return formatted_date
+
+def not_meet():
+  today = datetime.now()
+  global last_date
+  start_date_1 = last_date.strptime(start_date, "%Y-%m-%d")
+  missU = today- start_date_1
+  return missU
     
 def get_lunar_birthday():
     birthday_year = 2001
@@ -95,6 +103,7 @@ data = {"weather":{"value":dayweather},
         "date":{"value":get_today()},
         "city":{"value":"山西省临汾市隰县"},
         "lunardate":{"value":get_lunar_birthday()},
+        "missu":{"value":not_meet()}
         }
 res = wm.send_template(user_id, template_id, data)
 print(res)
