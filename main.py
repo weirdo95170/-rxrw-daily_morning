@@ -34,11 +34,13 @@ def get_weather():
 
 def get_count():
   global start_date
-  start_date = datetime.strptime(start_date, "%Y-%m-%d")
-  delta = today- start_date
+  today = datetime.now()
+  start_date_1 = datetime.strptime(start_date, "%Y-%m-%d")
+  delta = today- start_date_1
   return delta.days
 
 def get_birthday():
+  today = datetime.now()
   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
   if next < datetime.now():
     next = next.replace(year=next.year + 1)
@@ -53,11 +55,26 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
+def get_today():
+  today = datetime.now()
+  formatted_date = today.strftime("%Y年%m月%d日")
+  return formatted_date
+
 
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 daytemp_float,nighttemp_float ,dayweather,nightweather= get_weather()
-data = {"weather":{"value":dayweather},"temperature":{"value":daytemp_float},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+data = {"weather":{"value":dayweather},
+        "max_temperature":{"value":daytemp_float},
+        "min_temperature":{"value":nighttemp_float},
+        "love_days":{"value":get_count()},
+        "birthday_left":{"value":get_birthday()},
+        "words":{"value":get_words(), 
+        "color":get_random_color()},
+        "name":{"value":"傻宝儿"},
+        "date":{"value":get_today()},
+        "city":{"value":"山西省临汾市隰县"}
+        }
 res = wm.send_template(user_id, template_id, data)
 print(res)
