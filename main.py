@@ -9,7 +9,6 @@ from lunardate import LunarDate
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
-last_date = "2024-01-06"
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
 
@@ -43,10 +42,10 @@ def get_count():
     
 def not_meet():
   today = datetime.now()
-  global last_date
+  last_date = "2024-01-06"
   last_date_1 = datetime.strptime(last_date, "%Y-%m-%d")
   missU = today- last_date_1
-  return missU
+  return missU.days
 
 def get_birthday():
   today = datetime.now()
