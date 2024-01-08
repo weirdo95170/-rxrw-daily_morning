@@ -33,9 +33,10 @@ def get_weather():
     return daytemp_float,nighttemp_float ,dayweather,nightweather
 
 def get_count():
+  global start_date
   start_date = datetime.strptime(start_date, "%Y-%m-%d")
   delta = today- start_date
-  return delta.day
+  return delta.days
 
 def get_birthday():
   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
