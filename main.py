@@ -85,6 +85,13 @@ def get_lunar_birthday():
     days_to_birthday = (lunar_birthday.toSolarDate() - today).days
 
     return days_to_birthday
+    
+def meiriqinghua():
+    url = 'https://api.shadiao.pro/chp'
+    res = requests.get(url)
+    content = res.json()
+    text_value = content['data']['text']
+    return text_value
 
 
 client = WeChatClient(app_id, app_secret)
@@ -102,7 +109,8 @@ data = {"weather":{"value":dayweather},
         "date":{"value":get_today()},
         "city":{"value":"山西省临汾市隰县"},
         "lunardate":{"value":get_lunar_birthday()},
-        "missu":{"value":not_meet()}
+        "missu":{"value":not_meet()},
+        "qinghua":{"value":meiriqinghua()}
         }
 res = wm.send_template(user_id, template_id, data)
 print(res)
