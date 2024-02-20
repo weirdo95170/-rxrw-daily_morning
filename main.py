@@ -117,7 +117,7 @@ data = {"weather":{"value":dayweather},
         "city":{"value":"山西省临汾市隰县"},
         "lunardate":{"value":get_lunar_birthday()},
         "missu":{"value":not_meet()},
-        "qinghua":{"value":meiriqinghua()}
+        "qinghua":{"value":meiriqinghua()},
         "loveu":{"value":we_had_separated()}
         }
 res = wm.send_template(user_id, template_id, data)
