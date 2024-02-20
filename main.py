@@ -51,7 +51,7 @@ def we_had_separated():
   today = datetime.now()
   last_date = "2024-02-02"
   last_date_1 = datetime.strptime(last_date, "%Y-%m-%d")
-  missU = today- last_date_1
+  LOVE = today- last_date_1
   return LOVE.days
 
 def get_birthday():
