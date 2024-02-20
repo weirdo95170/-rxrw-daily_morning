@@ -47,6 +47,13 @@ def not_meet():
   missU = today- last_date_1
   return missU.days
 
+def we_had_separated():
+  today = datetime.now()
+  last_date = "2024-02-02"
+  last_date_1 = datetime.strptime(last_date, "%Y-%m-%d")
+  missU = today- last_date_1
+  return LOVE.days
+
 def get_birthday():
   today = datetime.now()
   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
@@ -111,6 +118,7 @@ data = {"weather":{"value":dayweather},
         "lunardate":{"value":get_lunar_birthday()},
         "missu":{"value":not_meet()},
         "qinghua":{"value":meiriqinghua()}
+        "loveu":{"value":we_had_separated()}
         }
 res = wm.send_template(user_id, template_id, data)
 print(res)
